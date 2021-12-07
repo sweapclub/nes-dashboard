@@ -47,7 +47,7 @@ export default {
           //   }
         });
       });
-      console.log(this.saleData);
+
       readXlsxFile(this.files, { sheet: "Input" }).then((rows) => {
         for (let i = 1; i < rows.length; i++) {
           if (rows[i][0].includes("EO_feed_ub"))
@@ -66,20 +66,21 @@ export default {
         }
       });
     },
-    uploadAction() {
-      console.log({ sale: this.saleData, parameter: this.paramInput });
 
+    uploadAction() {
       fetch(`${process.env.VUE_APP_API_PATH}/input`, {
         method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           sale: this.saleData,
           parameter: this.paramInput,
         }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
+      }).then((res) => res.json());
+      // .then((data) => {
+      // });
     },
   },
 };
