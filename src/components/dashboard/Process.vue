@@ -202,9 +202,9 @@ export default {
   },
   methods: {
     getProcess(m) {
-      console.log(
-        `${process.env.VUE_APP_API_PATH}/process/${this.getStartDate}/${this.getEndDate}/?method=${m}`
-      );
+      // // console.log(
+      //   `${process.env.VUE_APP_API_PATH}/process/${this.getStartDate}/${this.getEndDate}/?method=${m}`
+      // );
       return fetch(
         `${process.env.VUE_APP_API_PATH}/process/${this.getStartDate}/${this.getEndDate}/?method=${m}`
       )
@@ -260,7 +260,7 @@ export default {
         .then((data) => {
           data.detail = JSON.parse(JSON.stringify(this.benefitCurrent));
           this.benefitObj = data;
-          console.log(this.benefitObj);
+          // console.log(this.benefitObj);
         });
     },
     changeProcess() {

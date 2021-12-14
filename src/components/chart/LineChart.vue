@@ -113,6 +113,7 @@ export default {
           data: e.value,
           type: "line",
           name: e.name,
+          symbol: "none",
         });
       });
 

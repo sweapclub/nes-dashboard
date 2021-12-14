@@ -10,10 +10,12 @@
       </h2>
       <v-spacer></v-spacer>
       <div class="d-flex" style="gap: 5px">
-        <v-btn dense :class="{ accent: activeBtn }" @click="setWeek"
+        <v-btn dense :class="{ accent: activeBtn == 'week' }" @click="setWeek"
           >1 Week</v-btn
         >
-        <v-btn dense @click="setMonth">1 Month</v-btn>
+        <v-btn dense :class="{ accent: activeBtn == 'month' }" @click="setMonth"
+          >1 Month</v-btn
+        >
       </div>
     </div>
 

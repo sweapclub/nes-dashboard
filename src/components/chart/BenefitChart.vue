@@ -57,61 +57,70 @@ export default {
   methods: {
     setGraph(obj) {
       let series = [];
+      let setRefColor = ["#5470c6", "#91cc75"];
+      let colorTheme = ["#fac858", "#ee6666", "#73c0de", "#3ba272"];
+      let setValue = [obj.detail.optimized, obj.detail.actual];
 
-      obj.series.forEach((e) => {
+      obj.series.forEach((e, i) => {
         let d = [];
         for (let i = 0; i < obj.xAxis.length; i++) {
           d.push([obj.xAxis[i], e.value[i]]);
         }
-        console.log(d);
+
         series.push({
           data: d,
           type: "line",
           name: e.name,
-          // markLine: {
-          //   silent: true,
-          //   lineStyle: {
-          //     color: "#333",
-          //   },
-          //   symbol: ["none", "none"],
-          //   data: [
-          //     { xAxis: 4.5},
-          //     {
-          //       xAxis: 4000,
-          //     },
-          //     { xAxis: 3700 },
-          //   ],
-          // },
+          lineStyle: { color: colorTheme[i] },
+          symbol: "none",
+          markLine: {
+            silent: false,
+            lineStyle: {
+              color: setRefColor[i],
+            },
+            symbol: ["none", "none"],
+            data: [
+              {
+                name: "ref",
+                xAxis: setValue[i],
+              },
+              // {
+              //   name: "actual",
+              //   xAxis: obj.detail.actual,
+              //   // xAxis: "4.5",
+              // },
+              // { name: "optimized", xAxis: obj.detail.optimized },
+            ],
+          },
         });
       });
-      // console.log(obj.detail);
-      series[0].markLine = {
-        silent: false,
-        lineStyle: {
-          color: "#333",
-        },
-        symbol: ["none", "none"],
-        data: [
-          {
-            name: "actual",
-            xAxis: obj.detail.actual,
-            // xAxis: "4.5",
+
+      if (series.length > 0) {
+        series[0].markLine = {
+          silent: false,
+          lineStyle: {
+            color: "#5470c6",
           },
-          { name: "optimized", xAxis: obj.detail.optimized },
-        ],
-      };
+          symbol: ["none", "none"],
+          data: [
+            {
+              name: "actual",
+              xAxis: obj.detail.actual,
+              // xAxis: "4.5",
+            },
+            { name: "optimized", xAxis: obj.detail.optimized },
+          ],
+        };
+      }
+
       // console.log(series);
 
       this.$refs.chart.setOption({
         title: {
           text: this.graphObj.name,
         },
-        // xAxis: {
-        //   data: obj.xAxis,
-        // },
         series: JSON.parse(JSON.stringify(series)),
       });
-      console.log(this.$refs.chart.getOption());
     },
   },
   data() {
