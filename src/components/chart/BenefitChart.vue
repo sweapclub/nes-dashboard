@@ -71,7 +71,7 @@ export default {
           data: d,
           type: "line",
           name: e.name,
-          lineStyle: { color: colorTheme[i] },
+          itemStyle: { color: colorTheme[i] },
           symbol: "none",
           markLine: {
             silent: false,
